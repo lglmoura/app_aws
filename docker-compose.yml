@@ -10,8 +10,8 @@ services:
     restart: always
     environment:
           - POSTGRES_USER=postgres #${DB_USERNAME}
-          - POSTGRES_PASSWORD=1q2w3e4r #${DB_PASSWORD}
-          - POSTGRES_DB=aws_db #${DB_DATABASE}
+          - POSTGRES_PASSWORD=Aula*Infra #${DB_PASSWORD}
+          - POSTGRES_DB=app_db #${DB_DATABASE}
     volumes:
       - pg-data:/var/lib/postgresql/data
     networks:
@@ -25,11 +25,8 @@ services:
       - aws-network
     container_name: aws_app
     environment:
-          - DB_USERNAME=postgres #${DB_USERNAME}
-          - DB_PASSWORD=1q2w3e4r #${DB_PASSWORD}
-          - DB_DATABASE=aws_db #${DB_DATABASE}
-          - DB_HOST=localhost
-          - DB_PORT=5432
+      - DATABASE_URL=postgresql://postgres:Aula*Infra@aws_db:5432/app_db?schema=public
+          
     
     links:   #Novo atributo incluso
       - aws_db
